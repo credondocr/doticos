@@ -4,7 +4,8 @@ const convertor = require('steam-id-convertor')
 const request = require('request')
 const redis = require('redis');
 const config = require('../config/config')
-const client = redis.createClient(config.redis.port, config.redis.host); //creates a new client
+
+const client = redis.createClient(config.redis.url);
 
 // HTTP layer, in this instance you can manage express request, response and next.
 // In libraries/controller you have the basic RESTful methods find, findOne, findById,

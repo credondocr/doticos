@@ -13,8 +13,7 @@ const config = milieu('doticos', {
     dota_api_key: process.env.DOTA_API_KEY
   },
   redis:{
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT
+    url: process.env.REDIS_URL
   }
 });
 
