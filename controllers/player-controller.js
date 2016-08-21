@@ -64,7 +64,7 @@ class PlayerController extends Controller {
     client.get(account_id, function(err, reply) {
       console.log(reply);
       if(reply === null ){
-        request('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=2029F8A592609ADA5E680CE08A2F128F&steamids=' + account_id, function (error, response, body) {
+        request('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + process.env.STEAM_API_KEY + '&steamids=' + account_id, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             client.set(account_id, body);
             res.status(200).send(body)
