@@ -10,12 +10,12 @@ const morgan     = require('morgan');
 
 const routes = require('./routes');
 
-const port = config.server.port;
+const port = process.env.PORT;
 const app  = express();
 
 require('./libraries/promisify-all')(['mongoose']);
 
-mongoose.connect(config.mongo.url);
+mongoose.connect(process.env.MONGO_URLl);
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));

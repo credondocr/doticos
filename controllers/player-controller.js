@@ -5,7 +5,7 @@ const request = require('request')
 const redis = require('redis');
 const config = require('../config/config')
 
-const client = redis.createClient(config.redis.url);
+const client = redis.createClient(process.env.REDIS_URL);
 
 // HTTP layer, in this instance you can manage express request, response and next.
 // In libraries/controller you have the basic RESTful methods find, findOne, findById,
