@@ -1,6 +1,7 @@
 const config = require('./config/config');
 
 const express  = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const helmet     = require('helmet');
@@ -20,9 +21,10 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(cors());
+
 
 app.use('/', routes);
 
 app.listen(port, () => { console.log(`Magic happens on port ${port}`); });
-
 module.exports = app;

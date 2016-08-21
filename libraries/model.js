@@ -9,6 +9,12 @@ class Model {
     return newSchemaModel.saveAsync();
   }
 
+  upsert(query, updatedModel){
+    return this.SchemaModel
+      .findByIdAndUpdate(query, updatedModel, { upsert: true })
+      .execAsync();
+  }
+
   update(id, updatedModel) {
     return this.SchemaModel
       .findByIdAndUpdate(id, updatedModel, { new: true })
@@ -18,6 +24,13 @@ class Model {
   find(query) {
     return this.SchemaModel
       .find(query)
+      .execAsync();
+  }
+
+  findAndSort(query){
+    return this.SchemaModel
+      .find(query)
+      .sort({wins_count: -1})
       .execAsync();
   }
 

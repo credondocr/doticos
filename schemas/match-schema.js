@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 
 const MatchSchema = new Schema({
-  "match_id": { type: String, unique: true, index: true},
+  "match_id": { type: String, index: { unique: true } },
   "radiant_win": {type: Boolean},
   "players": {type: Array}
 });
