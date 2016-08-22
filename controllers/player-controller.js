@@ -48,7 +48,9 @@ class PlayerController extends Controller {
     PlayerModel.find({ account_id: player.account_id}).then((docs) => {
       docs.forEach((doc) => {
         var data = doc._doc
-        PlayerModel.update(data._id, {wins_count: data.wins.length, losses_count: data.losses.length} )
+        var total = data.wins.length + data.losses.length;
+
+        PlayerModel.update(data._id, {wins_count: data.wins.length, losses_count: data.losses.length, winrate: data.wins.length * 100 / total } )
       })
     })
   }
