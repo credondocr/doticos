@@ -15,7 +15,7 @@ const app  = express();
 
 require('./libraries/promisify-all')(['mongoose']);
 
-mongoose.connect(process.env.MONGO_URLl);
+mongoose.connect(process.env.MONGO_URL);
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
