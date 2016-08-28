@@ -1,13 +1,13 @@
 const Controller = require('../libraries/controller');
 const LeagueModel  = require('../models/league-model');
-const Dota2Api = require('dota').dota2api;
 const MatchController = require('../controllers/match-controller');
 const PlayerController = require('../controllers/player-controller')
-
-// HTTP layer, in this instance you can manage express request, response and next.
-// In libraries/controller you have the basic RESTful methods find, findOne, findById,
-// create, update and remove. Because this class is extending from there, you got that solved.
-// You can overwrite extended methods or create custom ones here.
+const Dota2Api = require('dota').dota2api;
+const config = require('../config/config')
+const key = config.api.steam_api_key; //Your personal API key (from above)
+const language = 'en_us';// The language to retrieve results in (default is en_us) (see http://en.wikipedia.org/wiki/ISO_639-1 for the language codes (first two characters) and http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes for the country codes (last two characters))
+const format = 'JSON';
+const dota2api = new Dota2Api(key, language, format);
 
 
 class LeagueController extends Controller {
@@ -39,6 +39,29 @@ class LeagueController extends Controller {
 
      })
      setTimeout(( ) => {  }, 1500);
+  }
+
+  fetchLeague(league_id){
+    var self = this
+    var config = {
+      league_id : league_id
+    }
+    dota2api.getMatchHistory(config, function(err, data) {
+      if (err) {
+        throw err;
+      } else {
+        let matches = JSON.parse(data).result.matches;
+        matches.forEach((match) => {
+          self.createMatch(match)
+          match.players.forEach((player)=> {
+            PlayerController.storePlayer(player)
+            PlayerController.updateScores(player)
+            setTimeout(() =>{  }, 2500);
+          })
+          setTimeout(() =>{  }, 2500);
+        })
+      }
+    })
   }
 }
 

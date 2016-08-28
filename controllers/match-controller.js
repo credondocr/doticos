@@ -3,7 +3,7 @@ const MatchModel  = require('../models/match-model');
 const Dota2Api = require('dota').dota2api;
 const config = require('../config/config')
 
-const key = process.env.DOTA_API_KEY; //Your personal API key (from above)
+const key = config.api.steam_api_key; //Your personal API key (from above)
 const language = 'en_us';// The language to retrieve results in (default is en_us) (see http://en.wikipedia.org/wiki/ISO_639-1 for the language codes (first two characters) and http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes for the country codes (last two characters))
 const format = 'JSON';
 const dota2api = new Dota2Api(key, language, format);
